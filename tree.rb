@@ -11,17 +11,16 @@ end
 def walk(dir, level)
     Dir.chdir(dir)
     level = level + 1
-    ls = Dir.entries(".")
-    ls.each do |el|
+    Dir.foreach(".") do |item|
         # Пропускаем текущий и родительский каталоги
-        if (el == ".") || (el == "..")
+        if (item == ".") || (item == "..")
             next
         end
             
-        print_element(el, level)
+        print_element(item, level)
         
-        if File.directory? el
-            walk(el, level)
+        if File.directory? item
+            walk(item, level)
         end
     end
   
